@@ -8,8 +8,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+ public void QuitGame()
+{
+    Application.Quit();
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+    #endif
+}
 }

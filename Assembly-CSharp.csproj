@@ -51,13 +51,18 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Health\HealthCollectable.cs" />
     <Compile Include="Assets\Scripts\Enemy_Sideways.cs" />
+    <Compile Include="Assets\Scripts\ButtonHover.cs" />
+    <Compile Include="Assets\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Scripts\Health\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\WinScreen.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\GameoverScreen.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\PlayerRespawn.cs" />
     <Compile Include="Assets\Scripts\Health\Health.cs" />
+    <Compile Include="Assets\Scripts\WinTrigger.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
   </ItemGroup>

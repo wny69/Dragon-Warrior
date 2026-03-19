@@ -30,15 +30,20 @@ public class Projectile : MonoBehaviour
         if (lifetime > 5) gameObject.SetActive(false);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+ private void OnTriggerEnter2D(Collider2D collision)
+{
+    // temporarily remove layer check to test
+    Enemy_Sideways enemy = collision.GetComponent<Enemy_Sideways>();
+    if (enemy != null)
     {
-        // ignore anything not on the target layer
-        if (((1 << collision.gameObject.layer) & targetLayer) == 0) return;
-
-        hit = true;
-        boxCollider.enabled = false;
-        animator.SetTrigger("explode");
+        Debug.Log("Hit enemy!");
+        enemy.StopEnemy();
     }
+
+    hit = true;
+    boxCollider.enabled = false;
+    animator.SetTrigger("explode");
+}
 
     public void SetDirection(float _direction)
     {

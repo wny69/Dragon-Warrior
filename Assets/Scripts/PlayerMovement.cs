@@ -12,8 +12,7 @@ public class Playermovement : MonoBehaviour
     private Animator animator;
     private Rigidbody2D body;
     private BoxCollider2D boxCollider;
-    private float wallJumpCooldown;
-    // Add this with your other private fields at the top
+    private float wallJumpCooldown = 1f;
     private float moveInput;
 
     private void Awake()
@@ -25,7 +24,7 @@ public class Playermovement : MonoBehaviour
 
     private void Update()
     {
-        float moveInput = 0f;
+        moveInput = 0f;
 
         if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
             moveInput = -1f;
@@ -65,13 +64,9 @@ public class Playermovement : MonoBehaviour
         }
         else if (OnWall() && !IsGrounded())
         {
-            // Push strongly away from wall
             float wallDirection = -Mathf.Sign(transform.localScale.x);
             body.linearVelocity = new Vector2(wallDirection * wallJumpXForce, jumpForce);
-
-            // Flip player to face away from wall
             transform.localScale = new Vector3(wallDirection, 1, 1);
-
             wallJumpCooldown = 0;
             animator.SetTrigger("jump");
         }
@@ -88,7 +83,6 @@ public class Playermovement : MonoBehaviour
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0f, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         return raycastHit.collider != null;
     }
-
 
     public bool canAttack()
     {

@@ -9,6 +9,8 @@ public class Enemy_Sideways : MonoBehaviour
     private bool movingLeft;
     private float leftEdge;
     private float rightEdge;
+    private bool isStopped;
+    private float stopTimer;
 
     private void Start()
     {
@@ -18,25 +20,39 @@ public class Enemy_Sideways : MonoBehaviour
 
     private void Update()
     {
+        if (isStopped)
+        {
+            stopTimer -= Time.deltaTime;
+            if (stopTimer <= 0)
+                isStopped = false;
+            return;
+        }
+
         if (movingLeft)
         {
-            if (transform.position.x > leftEdge) // ← was < (inverted)
+            if (transform.position.x > leftEdge)
                 transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
             else
-                movingLeft = false; // ← was outside the if block
+                movingLeft = false;
         }
         else
         {
             if (transform.position.x < rightEdge)
                 transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
             else
-                movingLeft = true; // ← braces were completely broken here
+                movingLeft = true;
         }
+    }
+
+    public void StopEnemy()
+    {
+        isStopped = true;
+        stopTimer = 4f;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isStopped)
             collision.GetComponent<Health>().TakeDamage(damage);
     }
 }
